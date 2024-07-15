@@ -5,10 +5,10 @@ on:
   pull_request:
     # любой брэнч
     branches:
-      '*'
+      - '*'
   push:
     branches:
-      'main'
+      - 'main'
 
 # описываем действия
 jobs:
