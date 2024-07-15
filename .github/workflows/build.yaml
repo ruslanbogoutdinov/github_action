@@ -20,6 +20,7 @@ jobs:
           cache: 'gradle'
       # устанавливаем Android SDK для запуска эмулятора и прогона на нем наших тестов
       # Download & install the Android SDK.
+      # asd
       - uses: malinskiy/action-android/install-sdk@release/0.1.3
       - uses: malinskiy/action-android/emulator-run-cmd@release/0.1.3
         with:
