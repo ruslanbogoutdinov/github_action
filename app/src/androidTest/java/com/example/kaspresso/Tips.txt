@@ -1,0 +1,46 @@
+### Allure отчёт ####
+
+- Allure сохраняет отчеты на файловой системе Android
+
+1) В классе с тестами вписываем "kaspressoBuilder = Kaspresso.Builder.withForcedAllureSupport()"
+
+2) Добавляем rule:
+
+@get:Rule
+    val runtimePermission: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
+3) В "build.gradle" в "testInstrumentationRunner" вставляем "com.kaspersky.kaspresso.runner.KaspressoRunner"
+
+4) Даём пермишн для storage в "AndroidManifest.xml":
+
+    <!-- These permissions are required to get access to /sdcard/allure-results -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+5) В <application> добавляем строчку:
+android:requestLegacyExternalStorage="true" - optional
+
+6) Можем проверить появление отчетов, командами:
+
+adb -s emulator-5554 exec-out sh -c "ls /sdcard/Documents"
+adb -s emulator-5554 exec-out sh -c "ls /sdcard/Documents/allure-results"
+
+7) Пулим наши отчеты:
+
+adb pull "/sdcard/Documents/allure-results"
+
+и проверяем наличие созданной папки "allure-results"
+
+8) Устанавливаем плагин "Allure TestOps" (также должен быть установлен и сам allure на компьютере)
+
+9) Кликаем правой кнопкой мыши по "allure-results" и выбираем "Allure Report: Generate on-the-fly"
+
+
+

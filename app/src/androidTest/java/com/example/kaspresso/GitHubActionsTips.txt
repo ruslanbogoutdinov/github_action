@@ -1,0 +1,3 @@
+### GitHub Actions ###
+
+1) В корне проекта создаем две папки "github" и "workflows" и внутри "workflows" создаем файл "build.yaml"
